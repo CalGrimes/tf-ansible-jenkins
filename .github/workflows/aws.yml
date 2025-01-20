@@ -52,6 +52,7 @@ jobs:
   TerraformApply:
     runs-on: ubuntu-latest
     needs: TerraformPlan
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
@@ -74,4 +75,3 @@ jobs:
         run: |
           cd terraform
           terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}"
-        if: github.ref == 'refs/heads/main'
