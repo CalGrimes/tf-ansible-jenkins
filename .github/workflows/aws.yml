@@ -9,9 +9,6 @@ on:
 env:
   AWS_REGION : "eu-west-2"
   PREFIX: "dev-cgrim"
-  TFSTATE_BUCKET: "cgrim-tfstate"
-  TFSTATE_KEY: "terraform.tfstate"
-  TFSTATE_DYNAMODB_TABLE: "cgrim-tfstate-lock"
 
 permissions:
       id-token: write   # This is required for requesting the JWT
@@ -80,4 +77,4 @@ jobs:
           echo "** Running Terraform Init**"
           terraform init
           echo "** Running Terraform Apply**"
-          terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" -var "tfstate_bucket=${{ env.TFSTATE_BUCKET }}" -var "tfstate_key=${{ env.TFSTATE_KEY }}" terraform.tfplan
+          terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" terraform.tfplan
