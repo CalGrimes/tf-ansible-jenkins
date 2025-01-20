@@ -71,6 +71,9 @@ jobs:
       - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v2.0.2
 
+      - name: Initialize Terraform
+        run: terraform init
+
       - name: Terraform Apply
         run: |
           cd terraform
