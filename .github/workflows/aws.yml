@@ -71,10 +71,10 @@ jobs:
       - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v2.0.2
 
-      - name: Initialize Terraform
-        run: terraform init
-
       - name: Terraform Apply
         run: |
           cd terraform
+          echo "** Running Terraform Init**"
+          terraform init
+          echo "** Running Terraform Apply**"
           terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}"
