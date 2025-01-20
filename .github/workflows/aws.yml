@@ -4,21 +4,24 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main]
+    branches: [ main ]
 
 env:
-  AWS_REGION : "eu-west-2"
+  AWS_REGION: "eu-west-2"
   PREFIX: "dev-cgrim"
 
 permissions:
-      id-token: write   # This is required for requesting the JWT
-      contents: read    # This is required for actions/checkout
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
 
 jobs:
   TerraformPlan:
     runs-on: ubuntu-latest
+    outputs:
+      tf_workspace: ${{ steps.tf_workspace.outputs.workspace }}
     steps:
       - name: Git clone the repository
+        id: tf_workspace
         uses: actions/checkout@v3
 
       - name: configure aws credentials
@@ -54,9 +57,6 @@ jobs:
     needs: TerraformPlan
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Git clone the repository
-        uses: actions/checkout@v3
-
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
