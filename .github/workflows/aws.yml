@@ -15,7 +15,7 @@ permissions:
   contents: read    # This is required for actions/checkout
 
 jobs:
-  TerraformPlan:
+  TerraformSetup:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
@@ -40,3 +40,12 @@ jobs:
           cd terraform
           echo "** Running Terraform Init**"
           terraform init
+
+          echo "** Running Terraform Validate**"
+          terraform validate
+
+          echo "** Running Terraform Plan**"
+          terraform plan -var "prefix=${{ env.PREFIX }}" -out=terraform.tfplan
+
+          echo "** Running Terraform Apply**"
+          terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" terraform.tfplan
