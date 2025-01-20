@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main]
+    branches: [ main ]
 
 env:
   AWS_REGION : "eu-west-2"
@@ -47,7 +47,7 @@ jobs:
           terraform validate
 
           echo "** Running Terraform Plan**"
-          terraform plan -var "prefix=${{ env.PREFIX }}"
+          terraform plan -var "prefix=${{ env.PREFIX }}" -out=terraform.tfplan
 
   TerraformApply:
     runs-on: ubuntu-latest
@@ -77,4 +77,4 @@ jobs:
           echo "** Running Terraform Init**"
           terraform init
           echo "** Running Terraform Apply**"
-          terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}"
+          terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" terraform.tfplan
