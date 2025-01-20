@@ -8,7 +8,7 @@ on:
 
 env:
   AWS_REGION: "eu-west-2"
-  PREFIX: "dev-cgrim"
+  PREFIX: "cgrim-dev"
 
 permissions:
   id-token: write   # This is required for requesting the JWT
