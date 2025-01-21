@@ -48,7 +48,7 @@ jobs:
           terraform plan -var "prefix=${{ env.PREFIX }}" -out=terraform.tfplan
 
       - name: Upload Terraform plan
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: terraform-plan
           path: terraform/terraform.tfplan
@@ -76,7 +76,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2.0.2
 
       - name: Download Terraform plan
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: terraform-plan
           path: terraform
