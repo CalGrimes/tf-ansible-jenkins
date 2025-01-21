@@ -8,7 +8,7 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_subnet" "sn_jenkins" {
-  vpc_id     = aws_vpc.vpc
+  vpc_id     = aws_vpc.vpc.id
   cidr_block = "10.0.10.0/24"
 
   tags = {
