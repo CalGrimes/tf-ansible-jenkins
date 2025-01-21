@@ -9,7 +9,7 @@ resource "local_file" "public_key_cgrim" {
 }
 
 module "ec2_instance" {
-  source = "../modules/ec2_instance"
+  source = "modules/ec2_instance"
 
   instance_type         = var.instance_type
   key_name              = aws_key_pair.keypair_cgrim.key_name
