@@ -7,3 +7,8 @@ variable "prefix" {
   description = "Prefix will be included in the name of most resources."
   default = ""
 }
+
+variable "my_ip" {
+  description = "Your IP address."
+  default = ""
+}
