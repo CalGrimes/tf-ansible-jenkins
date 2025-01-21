@@ -1,4 +1,4 @@
-resource "aws_security_group" "sg_cgrim" {
+resource "aws_security_group" "sg_cgrim_1" {
   name = "${var.prefix}-security-group"
 
   vpc_id = aws_vpc.vpc_cgrim.id
