@@ -15,7 +15,7 @@ permissions:
   contents: read    # This is required for actions/checkout
 
 jobs:
-  TerraformPlan:
+  TerraformSetup:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
@@ -47,32 +47,5 @@ jobs:
           echo "** Running Terraform Plan**"
           terraform plan -var "prefix=${{ env.PREFIX }}" -out=terraform.tfplan
 
-  TerraformApply:
-    runs-on: ubuntu-latest
-    needs: TerraformPlan
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Git clone the repository
-        uses: actions/checkout@v3
-
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1.7.0
-        with:
-          role-to-assume: arn:aws:iam::701722125320:role/GitHubAction-AssumeRoleWithAction
-          role-session-name: GitHub_to_AWS_via_FederatedOIDC
-          aws-region: ${{ env.AWS_REGION }}
-          
-      - name: Sts GetCallerIdentity
-        run: |
-          aws sts get-caller-identity
-
-      - name: Setup Terraform CLI
-        uses: hashicorp/setup-terraform@v2.0.2
-
-      - name: Terraform Apply
-        run: |
-          cd terraform
-          echo "** Running Terraform Init**"
-          terraform init
           echo "** Running Terraform Apply**"
           terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" terraform.tfplan
