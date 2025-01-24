@@ -91,7 +91,11 @@ jobs:
           terraform output
   TerraformOutput:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2.0.2
+
       - name: Run Ansible Playbook
         run: |
           terraform output -raw private_key > /tmp/private_key.pem
