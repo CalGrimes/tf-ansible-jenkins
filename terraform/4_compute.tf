@@ -15,6 +15,6 @@ module "ec2_instance" {
   key_name              = aws_key_pair.keypair_cgrim.key_name
   subnet_id             = aws_subnet.sn_cgrim.id
   vpc_security_group_ids = [aws_security_group.sg_cgrim.id]
-  name                  = concat(var.prefix, "_jenkins_instance")
+  name                  =  "${var.prefx}_jenkins_instance"  
   my_aws_key            = aws_key_pair.keypair_cgrim.key_name
 }
