@@ -3,16 +3,16 @@ resource "aws_key_pair" "keypair_cgrim" {
   public_key = tls_private_key.tls_private_key.public_key_openssh
 }
 
-# resource "local_file" "public_key_cgrim" {
-#   content  = tls_private_key.tls_private_key.private_key_pem
-#   filename = "jenkins_instance_key.pem"
-# }
+resource "local_file" "public_key_cgrim" {
+  content  = tls_private_key.tls_private_key.private_key_pem
+  filename = "jenkins_instance_key.pem"
+}
 
-# resource "aws_s3_object" "s3_key_object" {
-#   bucket = aws_s3_bucket.s3_key_bucket.bucket
-#   key    = "${aws_key_pair.keypair_cgrim.key_name}.pem"
-#   source = local_file.public_key_cgrim.filename
-# }
+resource "aws_s3_object" "s3_key_object" {
+  bucket = aws_s3_bucket.s3_key_bucket.bucket
+  key    = "${aws_key_pair.keypair_cgrim.key_name}.pem"
+  source = local_file.public_key_cgrim.filename
+}
 
 module "ec2_instance" {
   source = "./modules/ec2_instance"
