@@ -108,4 +108,4 @@ jobs:
           pip3 install --user ansible
           ls
           cat ansible/inventory
-          cd ansible && ansible-playbook --private-key /tmp/private_key.pem -i inventory jenkinsPlaybook.yml
+          cd ansible && ansible-playbook --private-key /tmp/private_key.pem -i inventory jenkinsPlaybook.yaml
