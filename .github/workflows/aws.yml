@@ -105,7 +105,7 @@ jobs:
           terraform output -raw private_key > /tmp/private_key.pem
           chmod 400 /tmp/private_key.pem
           export PUBLIC_IP=$(terraform output -raw public_ip)
-          sed -i 's|<host_ip>|$PUBLIC_IP|g' ansible/inventory
+          echo "jenkinsvm ansible_host=$PUBLIC_IP" > ansible/inventory
           pip3 install --user ansible
           ls
           cat ansible/inventory
