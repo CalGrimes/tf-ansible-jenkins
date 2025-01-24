@@ -89,3 +89,14 @@ jobs:
           echo "** Running Terraform Apply**"
           terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" -var "my_ip=${{ secrets.MY_IP }}" terraform.tfplan
           terraform output
+    TerraformOutput:
+      steps:
+        - name: Run Ansible Playbook
+          run: |
+            terraform output -raw private_key > /tmp/private_key.pem
+            chmod 400 /tmp/private_key.pem
+            sed -i "s/<host_ip>/$(terraform output -raw public_ip)/g" Ansible/inventory
+            pip3 install --user ansible
+            ls
+            cat ansible/inventory
+            cd Ansible && ansible-playbook --private-key /tmp/private_key.pem -i inventory jenkinsPlaybook.yml
