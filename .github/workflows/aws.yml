@@ -90,6 +90,7 @@ jobs:
           terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" -var "my_ip=${{ secrets.MY_IP }}" terraform.tfplan
           terraform output
   TerraformOutput:
+    runs-on: ubuntu-latest
     steps:
       - name: Run Ansible Playbook
         run: |
