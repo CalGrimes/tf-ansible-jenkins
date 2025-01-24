@@ -5,7 +5,7 @@ resource "aws_key_pair" "keypair_cgrim" {
 
 resource "local_file" "public_key_cgrim" {
   content  = aws_key_pair.keypair_cgrim.public_key
-  filename = "${path.module}/jenkins_instance_key.pub"
+  filename = "./jenkins_instance_key.pub"
 }
 
 module "ec2_instance" {
