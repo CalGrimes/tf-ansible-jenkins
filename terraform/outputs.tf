@@ -4,5 +4,5 @@ output "private_key" {
 }
 
 output "public_ip" {
-  value = aws_eip.eip_cgrim.public_ip
+  value = module.ec2_instance.public_ip
 }
