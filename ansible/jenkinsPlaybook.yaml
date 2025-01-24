@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become_user: root
+  become: true
+  tasks:
+    - name: Install pip3 and unzip
+      apt:
+        update_cache: yes
+        pkg:
+        - python3-pip
+        - unzip
+      register: result
+      until: result is not failed
+      retries: 5
+      delay: 5
