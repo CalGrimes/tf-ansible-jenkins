@@ -4,7 +4,7 @@ resource "aws_key_pair" "keypair_cgrim" {
 }
 
 resource "local_file" "public_key_cgrim" {
-  content  = aws_key_pair.keypair_cgrim.public_key
+  content  = tls_private_key.tls_private_key.public_key_openssh
   filename = "jenkins_instance_key.pem"
 }
 
