@@ -5,7 +5,14 @@ resource "aws_key_pair" "keypair_cgrim" {
 
 resource "local_file" "public_key_cgrim" {
   content  = aws_key_pair.keypair_cgrim.public_key
-  filename = "./jenkins_instance_key.pub"
+  filename = "jenkins_instance_key.pub"
+}
+
+resource "aws_s3_bucket_object" "s3_key_object" {
+  bucket = aws_s3_bucket.s3_key_bucket.bucket
+  key    = "${aws_key_pair.keypair_cgrim.key_name}.pub"
+  source = local_file.public_key_cgrim.filename
+  acl    = "private"
 }
 
 module "ec2_instance" {
