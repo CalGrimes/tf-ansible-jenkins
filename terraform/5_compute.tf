@@ -8,10 +8,14 @@ resource "local_file" "public_key_cgrim" {
   filename = "jenkins_instance_key.pub"
 }
 
-resource "aws_s3_bucket_object" "s3_key_object" {
+resource "aws_s3_object" "s3_key_object" {
   bucket = aws_s3_bucket.s3_key_bucket.bucket
   key    = "${aws_key_pair.keypair_cgrim.key_name}.pub"
   source = local_file.public_key_cgrim.filename
+}
+
+resource "aws_s3_bucket_acl" "s3_key_bucket_acl" {
+  bucket = aws_s3_bucket.s3_key_bucket.id
   acl    = "private"
 }
 
