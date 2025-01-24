@@ -100,7 +100,7 @@ jobs:
         run: |
           terraform output -raw private_key > /tmp/private_key.pem
           chmod 400 /tmp/private_key.pem
-          sed -i "s|<host_ip>|$(terraform output -raw public_ip)|g" Ansible/inventory
+          sed -i 's|<host_ip>|$(terraform output -raw public_ip)|g' ansible/inventory
           pip3 install --user ansible
           ls
           cat ansible/inventory
