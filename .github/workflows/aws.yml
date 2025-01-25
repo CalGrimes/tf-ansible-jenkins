@@ -97,7 +97,7 @@ jobs:
           cd terraform
           HOSTIP=`terraform output -raw public_ip`
           cd ..
-          sed -i.bak "s|<host_ip>|${HOSTIP}|g" ansible/inventory
+          sed -i.bak "s|<host_ip>|$HOSTIP|g" ansible/inventory
           pip3 install --user ansible
           cat ansible/inventory
           cd ansible && ansible-playbook --private-key /tmp/private_key.pem -i inventory jenkinsPlaybook.yaml
