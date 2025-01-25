@@ -94,8 +94,10 @@ jobs:
 
       - name: Initialise Ansible
         run: |
-         terraform/terraform output -raw public_ip > /tmp/public_ip.txt
+         cd terraform
+         terraform output -raw public_ip > /tmp/public_ip.txt
          cat /tmp/public_ip.txt
+         cd ..
          # Run Python script to substitute HOSTIP in the inventory
          python3 -c "
          import os
