@@ -97,7 +97,7 @@ jobs:
         run: |
          cat /tmp/public_ip.txt
          # Run Python script to substitute HOSTIP in the inventory
-         python3 -c "
+         python3 -c '
          import os
 
          public_ip = ""
@@ -118,7 +118,7 @@ jobs:
          # Write the modified content back to the inventory file
          with open('ansible/inventory', 'w') as file:
              file.write(inventory)
-         "
+         '
          # Install Ansible
          pip3 install --user ansible
          
