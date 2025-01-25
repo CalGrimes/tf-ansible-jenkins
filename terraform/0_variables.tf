@@ -17,8 +17,3 @@ variable "instance_type" {
   description = "The type of instance to create."
   default     = "t2.micro"
 }
-
-variable "runner_ip" {
-  description = "The IP address of the runner."
-  default     = ""
-}
