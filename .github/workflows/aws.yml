@@ -94,7 +94,9 @@ jobs:
 
       - name: Initialise Ansible
         run: |
+          ls
           cd ..
+          ls
           sed "s|<host_ip>|$(cat terraform/public_ip.txt)|g" ansible/inventory
           pip3 install --user ansible
           cat ansible/inventory
