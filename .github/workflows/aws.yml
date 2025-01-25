@@ -94,7 +94,7 @@ jobs:
 
       - name: Initialise Ansible
         run: |
-         cat ansible/inventory
+         cat /tmp/public_ip.txt
          # Run Python script to substitute HOSTIP in the inventory
          python3 -c "
          import os
