@@ -103,17 +103,13 @@ jobs:
         run: |
          cat /tmp/public_ip.txt
          # Run Python script to substitute HOSTIP in the inventory
-         python3 -c "import os; \
-         with open('/tmp/public_ip.txt', 'r') as file: public_ip = file.read().strip(); print('Python public_ip:', public_ip); \
-         with open('ansible/inventory', 'r') as file: inventory = file.read(); \
-         inventory = inventory.replace('<host_ip>', public_ip); \
-         with open('ansible/inventory', 'w') as file: file.write(inventory); \
-         print('Inventory file updated successfully.')"
+         python3 init-ansible.py
 
          # Install Ansible
          pip3 install --user ansible
          
          # Display the updated inventory file
+         echo "Updated inventory file:"
          cat ansible/inventory
          
          # Run the Ansible playbook
