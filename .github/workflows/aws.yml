@@ -95,13 +95,13 @@ jobs:
       - name: Initialise Ansible
         run: |
           cd terraform
-          HOSTIP=`terraform output -raw public_ip`
-          echo $HOSTIP
+          HOSTIP=$(terraform output -raw public_ip)
+          echo "HOSTIP is: $HOSTIP"
           cd ..
-          sed -i.bak s|<host_ip>|$HOSTIP|g ansible/inventory
+          # Using awk to replace <host_ip> with $HOSTIP
+          awk -v hostip="$HOSTIP" '{gsub(/<host_ip>/, hostip); print}' ansible/inventory > ansible/inventory.tmp && mv ansible/inventory.tmp ansible/inventory
           pip3 install --user ansible
           cat ansible/inventory
           cd ansible && ansible-playbook --private-key /tmp/private_key.pem -i inventory jenkinsPlaybook.yaml
-
-
+      
          
