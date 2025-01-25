@@ -100,19 +100,19 @@ jobs:
           cd ..
           # Run Python script to substitute HOSTIP in the inventory
           python3 -c "
-            import os
+import os
             
-            # Read the inventory file
-            with open('ansible/inventory', 'r') as file:
-                content = file.read()
+# Read the inventory file
+with open('ansible/inventory', 'r') as file:
+  content = file.read()
             
-            # Substitute <host_ip> with the actual IP
-            content = content.replace('<host_ip>', os.getenv('HOSTIP'))
+# Substitute <host_ip> with the actual IP
+  content = content.replace('<host_ip>', os.getenv('HOSTIP'))
             
-            # Write the modified content back to the inventory file
-            with open('ansible/inventory', 'w') as file:
-                file.write(content)
-          "
+# Write the modified content back to the inventory file
+  with open('ansible/inventory', 'w') as file:
+      file.write(content)
+"
           pip3 install --user ansible
           cat ansible/inventory
           cd ansible && ansible-playbook --private-key /tmp/private_key.pem -i inventory jenkinsPlaybook.yaml
