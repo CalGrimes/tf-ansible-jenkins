@@ -35,4 +35,4 @@ jobs:
       - name: Destroy Terraform Resources
         run: |
           echo "** Destroying Terraform Resources **"
-          terraform destroy -auto-approve -var "prefix=${{ env.PREFIX }}"
+          terraform destroy -auto-approve
