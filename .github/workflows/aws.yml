@@ -110,8 +110,8 @@ jobs:
          with open('ansible/inventory', 'r') as file:
              inventory = file.read()
   
-        # Substitute <host_ip> with the actual IP
-        inventory = inventory.replace('<host_ip>', public_ip)
+         # Substitute <host_ip> with the actual IP
+         inventory = inventory.replace('<host_ip>', public_ip)
   
          # Write the modified content back to the inventory file
          with open('ansible/inventory', 'w') as file:
