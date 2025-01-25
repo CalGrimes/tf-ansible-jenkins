@@ -21,6 +21,10 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v3
 
+      - name: Get current IP address
+        run: |
+          echo "CURRENT_IP=$(curl -s http://checkip.amazonaws.com)"
+
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
@@ -45,7 +49,7 @@ jobs:
           terraform validate
 
           echo "** Running Terraform Plan**"
-          terraform plan -var "prefix=${{ env.PREFIX }}" -var "my_ip=${{ secrets.MY_IP }}" -out=terraform.tfplan
+          terraform plan -var "prefix=${{ env.PREFIX }}" -var "my_ip=${{ secrets.MY_IP }}"  -var "runner_ip=$(curl -s http://checkip.amazonaws.com)" -out=terraform.tfplan
 
       - name: Upload Terraform plan
         uses: actions/upload-artifact@v4
@@ -60,6 +64,10 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
+
+      - name: Get current IP address
+        run: |
+          echo "CURRENT_IP=$(curl -s http://checkip.amazonaws.com)"
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
@@ -87,7 +95,7 @@ jobs:
           echo "** Running Terraform Init**"
           terraform init
           echo "** Running Terraform Apply**"
-          terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" -var "my_ip=${{ secrets.MY_IP }}" terraform.tfplan
+          terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" -var "my_ip=${{ secrets.MY_IP }}" -var "runner_ip=$(curl -s http://checkip.amazonaws.com)" terraform.tfplan
           terraform output -raw private_key > /tmp/private_key.pem
           terraform output public_ip > /tmp/public_ip.txt
           chmod 400 /tmp/private_key.pem
