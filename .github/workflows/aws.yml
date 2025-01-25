@@ -93,6 +93,14 @@ jobs:
           chmod 400 /tmp/private_key.pem
           chmod 400 /tmp/public_ip.txt
 
+      - name: Debug Terraform Outputs
+        run: |
+          echo "Private key content:"
+          cat /tmp/private_key.pem
+          echo "Public IP content:"
+          cat /tmp/public_ip.txt
+          ls -la /tmp
+
       - name: Initialise Ansible
         run: |
          cat /tmp/public_ip.txt
