@@ -96,6 +96,7 @@ jobs:
         run: |
           cd terraform
           HOSTIP=`terraform output -raw public_ip`
+          echo $HOSTIP
           cd ..
           sed -i.bak "s|<host_ip>|$HOSTIP|g" ansible/inventory
           pip3 install --user ansible
