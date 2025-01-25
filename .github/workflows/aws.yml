@@ -21,6 +21,10 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v3
 
+      - name: Get current IP address
+        run: |
+          echo "CURRENT_IP=$(curl -s http://checkip.amazonaws.com)"
+
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
@@ -60,6 +64,10 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
+
+      - name: Get current IP address
+        run: |
+          echo "CURRENT_IP=$(curl -s http://checkip.amazonaws.com)"
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
