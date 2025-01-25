@@ -95,7 +95,7 @@ jobs:
       - name: Initialise Ansible
         run: |
           cd terraform
-          HOSTIP=$(terraform output -raw public_ip)
+          terraform output -raw public_ip >> $HOSTIP
           echo "HOSTIP is: $HOSTIP"
           cd ..
           # Run Python script to substitute HOSTIP in the inventory
