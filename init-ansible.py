@@ -6,7 +6,7 @@ inventory = ""
 # Read public_ip.txt
 with open('/tmp/public_ip.txt') as file:
   file.readline()
-  public_ip = file.read().replaceAll('"', '')
+  public_ip = file.read().replace('"', '')
   
   print("Python public_ip", public_ip)
 
