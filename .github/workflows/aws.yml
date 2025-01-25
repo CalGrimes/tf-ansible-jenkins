@@ -95,7 +95,7 @@ jobs:
       - name: Initialise Ansible
         run: |
           ls
-          sed "s|<host_ip>|$(cat terraform/public_ip.txt)|g" ansible/inventory
+          sed "s|<host_ip>|$(cat /tmp/public_ip.txt)|g" ansible/inventory
           pip3 install --user ansible
           cat ansible/inventory
           cd ansible && ansible-playbook --private-key /tmp/private_key.pem -i inventory jenkinsPlaybook.yaml
