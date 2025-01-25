@@ -21,4 +21,5 @@ variable "instance_type" {
 variable "runner_ip" {
   description = "The IP address of the runner."
   default     = ""
+  ephemeral   = true
 }
