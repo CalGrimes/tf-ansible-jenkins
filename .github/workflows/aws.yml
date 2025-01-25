@@ -92,4 +92,5 @@ jobs:
           chmod 400 /tmp/private_key.pem
 
           # Use init-ansible.sh
-          ./init-ansible.sh
+          chmod +x ../init-ansible.sh
+          ../init-ansible.sh
