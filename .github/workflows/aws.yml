@@ -90,9 +90,9 @@ jobs:
           terraform apply -auto-approve -var "prefix=${{ env.PREFIX }}" -var "my_ip=${{ secrets.MY_IP }}" terraform.tfplan
           terraform output -raw private_key > /tmp/private_key.pem
           chmod 400 /tmp/private_key.pem
+          ls
           export PUBLIC_IP=$(terraform output -raw public_ip)
           echo "jenkinsvm ansible_host=$PUBLIC_IP" >> ansible/inventory
           pip3 install --user ansible
-          ls
           cat ansible/inventory
           cd ansible && ansible-playbook --private-key /tmp/private_key.pem -i inventory jenkinsPlaybook.yaml
