@@ -91,14 +91,11 @@ jobs:
           terraform output -raw private_key > /tmp/private_key.pem
           terraform output -raw public_ip > /tmp/public_ip.txt
           chmod 400 /tmp/private_key.pem
+          chmod 400 /tmp/public_ip.txt
 
       - name: Initialise Ansible
         run: |
-         echo "test" > /tmp/test.txt && cat /tmp/test.txt
-         cd terraform
-         terraform output -raw public_ip > /tmp/public_ip.txt
          cat /tmp/public_ip.txt
-         cd ..
          # Run Python script to substitute HOSTIP in the inventory
          python3 -c "
          import os
