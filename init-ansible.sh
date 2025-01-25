@@ -1,6 +1,8 @@
 #! /bin/bash
 export PUBLIC_IP=$(terraform output -raw public_ip)
 
+echo $PUBLIC_IP
+
 cd ..
 
 sed "s|<host_ip>|$PUBLIC_IP|g" ansible/inventory
