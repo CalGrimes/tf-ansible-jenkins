@@ -94,6 +94,7 @@ jobs:
 
       - name: Initialise Ansible
         run: |
+         echo "test" > /tmp/test.txt && cat /tmp/test.txt
          cd terraform
          terraform output -raw public_ip > /tmp/public_ip.txt
          cat /tmp/public_ip.txt
