@@ -94,25 +94,28 @@ jobs:
 
       - name: Initialise Ansible
         run: |
-         cd terraform
-         export HOSTIP=$(terraform output -raw public_ip)
-         echo "HOSTIP is: $HOSTIP"
-         cd ..
-         
          # Run Python script to substitute HOSTIP in the inventory
          python3 -c "
          import os
+
+         public_ip = ""
+         inventory = ""
+
+         # Read public_ip.txt
+         with open('/tmp/public_ip.txt') as file:
+            public_ip = file.read()
+         
   
          # Read the inventory file
          with open('ansible/inventory', 'r') as file:
-             content = file.read()
+             inventory = file.read()
   
-         # Substitute <host_ip> with the actual IP
-         content = content.replace('<host_ip>', os.getenv('HOSTIP'))
+        # Substitute <host_ip> with the actual IP
+        inventory = inventory.replace('<host_ip>', public_ip)
   
          # Write the modified content back to the inventory file
          with open('ansible/inventory', 'w') as file:
-             file.write(content)
+             file.write(inventory)
          "
          # Install Ansible
          pip3 install --user ansible
