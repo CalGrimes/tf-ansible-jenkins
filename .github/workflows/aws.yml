@@ -51,8 +51,6 @@ jobs:
           echo "** Running Terraform Plan**"
           terraform plan -var "prefix=${{ env.PREFIX }}" -var "my_ip=${{ secrets.MY_IP }}" -out=terraform.tfplan
 
-          terraform destroy
-
       - name: Upload Terraform plan
         uses: actions/upload-artifact@v4
         with:
